@@ -17,11 +17,11 @@ export class AuthService {
   constructor(public af: AngularFire,public auth: AngularFireAuth, private router: Router) {
     this.af.auth.subscribe(auth => {
         if(auth){
-          console.log(auth);
+         // console.log(auth);
           this.isLoggedIn = true;
           this.router.navigate(['/secure']);
         }else{
-          console.log("not logged in");
+         // console.log("not logged in");
            this.router.navigate(['/login']);
         }
       }
