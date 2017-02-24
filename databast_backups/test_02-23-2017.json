@@ -1,0 +1,110 @@
+{
+  "complaints" : {
+    "-JS4hh97qukW9_JWoPRu" : {
+      "number" : "You can store and sync data in realtime without a backend.",
+      "date" : "EmberFire is flaming hot!",
+      "complaint_type" : "Food Order Mistake",
+	  "author" : "Luke Snider",
+	  "status" : "Open",
+	  "location" : "Store 01"
+    },
+	 "-JS4hh97qukW9_JWoPRs" : {
+      "number" : "You can store and sync data in realtime without a backend.",
+      "date" : "EmberFire is flaming hot!",
+      "complaint_type" : "Food Order Mistake",
+	  "author" : "Luke Snider",
+	  "status" : "Open",
+	  "location" : "Store 01"
+    },
+	 "-JS4hh97qukW9_JWoPRt" : {
+      "number": "You can store and sync data in realtime without a backend.",
+      "date" : "EmberFire is flaming hot!",
+      "complaint_type" : "Food Order Mistake",
+	  "author" : "Luke Snider",
+	  "status" : "Open",
+	  "location" : "Store 01"
+    },
+	 "-JS4hh97qukW9_JWoPRy" : {
+      "number" : "You can store and sync data in realtime without a backend.",
+      "date" : "EmberFire is flaming hot!",
+      "complaint_type" : "Food Order Mistake",
+	  "author" : "Luke Snider",
+	  "status" : "Open",
+	  "location" : "Store 01"
+    },
+	 "-JS4hh97qukW9_JWoPRm" : {
+      "number" : "You can store and sync data in realtime without a backend.",
+      "date" : "EmberFire is flaming hot!",
+      "complaint_type" : "Food Order Mistake",
+	  "author" : "Luke Snider",
+	  "status" : "Open",
+	  "location" : "Store 01"
+    }
+  },
+  "users" : {
+	"-ux4tYvlbONhljn8V7jF6kc0QvmY2" : {
+		"email" : "luke946@gmail.com",
+		"display_name" : "Luke Snider",
+		"first_name" : "Luke",
+		"last_name" : "Snider",
+		"groups" :	{
+			"Test Group1" : true,
+			"Test Group2" : true,
+			"Complaint Manager" : true
+		}
+	},
+	"-ZyannfUGAoTZ0fgGG8xbrA8zN7i2" : {
+		"email" : "luke946+littlekite1@gmail.com",
+		"display_name" : "Test User1",
+		"first_name" :	"Test",
+		"last_name" :	"User1",
+		"groups" :	{
+			"Test Group1" : true,
+			"Test Group2" : false,
+			"Complaint Manager" : true
+		}
+	},
+	"-X8zP4RnyccRK5Nm8XVOArbEWKht2" : {
+		"email" : "luke946+littlekite2@gmail.com",
+		"display_name" : "Test User2",
+		"first_name" : "Test",
+		"last_name" : "User2",
+		"groups" :	{
+			"Test Group1" : false,
+			"Test Group2" : true,
+			"Complaint Manager" : true
+		}
+	}
+  },
+  "groups" : {
+	"Test Group1" :{
+		"id" :	1,
+		"Title" : "Test Group1",
+		"users" : {
+			"-ZyannfUGAoTZ0fgGG8xbrA8zN7i2" : true,
+			"-X8zP4RnyccRK5Nm8XVOArbEWKht2" : false,
+			"-ux4tYvlbONhljn8V7jF6kc0QvmY2" : true
+
+		}
+	},
+	"Test Group2" : {
+		"id" :	2,
+		"Title" : "Test Group2",
+		"users" : {
+			"-ZyannfUGAoTZ0fgGG8xbrA8zN7i2" :  false,
+			"-X8zP4RnyccRK5Nm8XVOArbEWKht2" : true,
+			"-ux4tYvlbONhljn8V7jF6kc0QvmY2" : true
+		}
+	},
+	"Complaint Manager" : {
+		"id" :	3,
+		"Title" : "Complaint Manager",
+		"users" : {
+			"-ZyannfUGAoTZ0fgGG8xbrA8zN7i2" :  true,
+			"-X8zP4RnyccRK5Nm8XVOArbEWKht2" : true,
+			"-ux4tYvlbONhljn8V7jF6kc0QvmY2" : true
+
+		}
+	}
+  }
+}
