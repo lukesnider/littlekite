@@ -10,15 +10,15 @@ import { FormsModule }   from '@angular/forms';
 
 
 @Component({
-  templateUrl: '../templates/secure-dashboard.html'
+  templateUrl: '../templates/secure-complaints.html'
 })
 
-export class SecureDashboardComponent {
+export class SecureComplaintsComponent {
   user: FirebaseListObservable<any[]>;
   userArray = [];
   constructor(public af: AngularFire,public authService: AuthService, public router: Router) 
   {
-      this.get_user(af);
+      //this.get_user(af);
     
   }
 
