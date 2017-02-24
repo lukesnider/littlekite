@@ -18,7 +18,7 @@ import { AuthService }      from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(public af: AngularFire,private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> //{
   { 
     let url: string = state.url;
 
@@ -26,16 +26,5 @@ export class AuthGuard implements CanActivate {
     return Observable.of(this.authService.isLoggedIn);
   }
 
-  /*checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn) {
-       return true; }
-
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
-
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
-    return false;
-  }*/
-}
+//}
 }
