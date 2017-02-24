@@ -27,11 +27,7 @@ import { Router }      from '@angular/router';
 					<button type="submit" class="btn btn-default">Submit</button>
 					</div>
 				</form>
-				<form (ngSubmit)="logout()" #logoutform="ngForm">
-				<div class="form-group">
-					<button type="submit" class="btn btn-default">Logout</button>
-				</div>
-				</form>
+
 				</div>
 			</div>
 		</div>

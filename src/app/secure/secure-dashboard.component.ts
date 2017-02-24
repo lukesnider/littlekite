@@ -15,24 +15,23 @@ import { FormsModule }   from '@angular/forms';
         <h1>Dashboard</h1>
     </div>
 
+		<div class="">
+			<button (click)="logout()" class="btn btn-default">Logout</button>
+		</div>
+
 
   `
 })
 
 export class SecureDashboardComponent {
-/*	name: any;
-	  constructor(public af: AngularFire, public authService: AuthService, public router: Router) {
-			this.af.auth.subscribe(auth => {
-      			if(auth) {
-        		this.name = auth;
-				this.authService.isLoggedIn = true;
-      			}else{
-					  this.authService.isLoggedIn = false;
-				  }
-    		});
-	  }
-*/
+ message: string;
+  constructor(public af: AngularFire,public authService: AuthService, public router: Router) {
 
+  }
+
+  logout() {
+    this.af.auth.logout();
+  }
 }
 
 

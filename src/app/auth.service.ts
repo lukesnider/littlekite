@@ -19,6 +19,7 @@ export class AuthService {
         if(auth){
           console.log(auth);
           this.isLoggedIn = true;
+          this.router.navigate(['/secure']);
         }else{
           console.log("not logged in");
            this.router.navigate(['/login']);
@@ -27,19 +28,7 @@ export class AuthService {
     
     );
   }
-  // store the URL so we can redirect after logging in
- 
-  /*setboolean(auth){
 
-  }
-  isEmpty(obj) {
-      for(var prop in obj) {
-          if(obj.hasOwnProperty(prop))
-              return false;
-      }
-
-      return true;
-  }*/
 }
 
 
