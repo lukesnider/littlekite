@@ -9,7 +9,7 @@ import { AuthService }          from '../auth.service';
 
 const secureRoutes: Routes = [
   {
-    path: '',
+    path: 'secure',
     component: SecureComponent,
     canActivate: [AuthGuard],
     children: [

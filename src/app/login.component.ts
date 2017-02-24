@@ -41,22 +41,25 @@ import { Router }      from '@angular/router';
 
 export class LoginComponent {
  message: string;
-  constructor(public authService: AuthService, public router: Router) {
+  constructor(public af: AngularFire,public authService: AuthService, public router: Router) {
+
   }
 
-  login() {
-    this.authService.login().subscribe(() => {
-      if (this.authService.isLoggedIn) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/secure';
-        // Redirect the user
-        this.router.navigate([redirect]);
-      }
+  login(form){
+    this.af.auth.login({
+      email: form.email,
+      password: form.password,
+    },
+    {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password,
     });
+
+		//this.router.navigate(['/secure']);
   }
+
   logout() {
-    this.authService.logout();
+    this.af.auth.logout();
   }
 }
 

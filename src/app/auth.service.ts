@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFireModule, AuthProviders, AuthMethods,AngularFireAuth,FirebaseAuthState} from 'angularfire2';
-
+import { AngularFireModule, AuthProviders, AuthMethods,AngularFireAuth,FirebaseAuthState, AngularFire} from 'angularfire2';
+import {
+  CanActivate, Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+}                           from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
@@ -8,27 +12,34 @@ import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class AuthService {
-  isLoggedIn: boolean = false;
-  constructor(public af: AngularFireAuth,public auth: AngularFireAuth) {
-    this.af.auth.subscribe(auth => console.log(auth));
-    if(auth) this.isLoggedIn = true;
+  isLoggedIn: boolean = true;
+   redirectUrl: string;
+  constructor(public af: AngularFire,public auth: AngularFireAuth, private router: Router) {
+    this.af.auth.subscribe(auth => {
+        if(auth){
+          console.log(auth);
+          this.isLoggedIn = true;
+        }else{
+          console.log("not logged in");
+           this.router.navigate(['/login']);
+        }
+      }
+    
+    );
   }
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
+ 
+  /*setboolean(auth){
 
-  login(email,password): Observable<boolean> {
-    this.af.auth.login({
-      email: email,
-      password: password,
-    },
-    {
-      provider: AuthProviders.Password,
-      method: AuthMethods.Password,
-    });
-    return Observable.of(true).do(val => this.isLoggedIn);
   }
+  isEmpty(obj) {
+      for(var prop in obj) {
+          if(obj.hasOwnProperty(prop))
+              return false;
+      }
 
-  logout(): void {
-    this.isLoggedIn = false;
-  }
+      return true;
+  }*/
 }
+
+
