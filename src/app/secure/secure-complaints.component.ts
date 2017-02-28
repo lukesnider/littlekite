@@ -4,6 +4,7 @@ import { AngularFireModule, AuthProviders, AuthMethods,AngularFireAuth,FirebaseA
 import { AuthService } from '../auth.service';
 import { Router }      from '@angular/router';
 import { FormsModule }   from '@angular/forms';
+import {UsersService} from "./users-service.service";
 
 
 
@@ -14,33 +15,27 @@ import { FormsModule }   from '@angular/forms';
 })
 
 export class SecureComplaintsComponent {
+  complaints: FirebaseListObservable<any[]>;
   user: FirebaseListObservable<any[]>;
-  userArray = [];
-  constructor(public af: AngularFire,public authService: AuthService, public router: Router) 
+
+  complaintsArray = [];
+  constructor(public af: AngularFire,public router: Router,public userService:UsersService) 
   {
-      //this.get_user(af);
+      this.get_complaints();
     
   }
 
 
 
-  get_user(af){
+  get_complaints(){
     this.af.auth.subscribe(auth => {
-      this.user = af.database.list('/users/-'+auth.uid);
+      this.complaints = this.af.database.list('/complaints', {
+        query: {
+          orderByChild: "group",
+          equalTo: this.get_userGroup()
+        }
+      });
 
-      this.user.subscribe(x => {
-        //console.log('Subscriber 1: ', x[0])
-        x.forEach(element => {
-          if(element.$key == 'groups'){
-            this.userArray[element.$key] = 'groups';
-
-          }else{
-            this.userArray[element.$key] = element.$value;
-          }
-        });
-      }
-        
-        );
     });
   }
 
@@ -50,7 +45,29 @@ export class SecureComplaintsComponent {
   logout() {
     this.af.auth.logout();
   }
-}
 
+  get_userGroup(){
+    var groupsArray = [];
+     this.af.auth.subscribe(auth => {
+        this.user = this.af.database.list('/users/-'+auth.uid);
+      
+      this.user.subscribe(x => {
+        
+        //console.log('Subscriber 1: ', x)
+        x.forEach(function(element){
+          //console.log(element);
+            if(element.$key == "groups"){
+            console.log(element);
+          }
+        });
+      });
+    
+  
+    });
+    return "Test ";
+  }
+
+
+}
 
 

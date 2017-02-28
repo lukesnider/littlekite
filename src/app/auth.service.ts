@@ -13,6 +13,7 @@ import 'rxjs/add/operator/delay';
 @Injectable()
 export class AuthService {
   isLoggedIn: boolean = true;
+  userGroup: string;
    redirectUrl: string;
   constructor(public af: AngularFire,public auth: AngularFireAuth, private router: Router) {
     this.af.auth.subscribe(auth => {

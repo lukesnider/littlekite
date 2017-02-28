@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../auth-guard.service';
 import { AuthService } from '../auth.service';
 import { UsersService } from './users-service.service';
+import  {DataTableModule} from "angular2-datatable";
 
 
 @NgModule({
     imports: [
         CommonModule,
-        SecureRoutingModule
+        SecureRoutingModule,
+        DataTableModule
     ],
     declarations: [
         SecureComponent,

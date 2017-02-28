@@ -5,7 +5,7 @@ import { SecureDashboardComponent } from './secure-dashboard.component';
 import { SecureComplaintsComponent } from './secure-complaints.component';
 import { AuthGuard } from '../auth-guard.service';
 import { AuthService }          from '../auth.service';
-
+import {DataTableModule}  from 'angular2-datatable';
 
 
 const secureRoutes: Routes = [
@@ -28,7 +28,8 @@ const secureRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(secureRoutes)
+        RouterModule.forChild(secureRoutes),
+        DataTableModule
     ],
     exports: [
         RouterModule
