@@ -14,6 +14,7 @@ import { Router }      from '@angular/router';
 
   <div class="container" style="margin-top:100px;">
 		<div class="row">
+      <div class="col-xs-6 col-xs-push-3">
 				<form (ngSubmit)="login(loginform.value)" #loginform="ngForm">
 					<div class="form-group">
 						<label for="email">Email address</label>
@@ -27,10 +28,10 @@ import { Router }      from '@angular/router';
 					<button type="submit" class="btn btn-default">Submit</button>
 					</div>
 				</form>
-
-				</div>
+        </div>
 			</div>
 		</div>
+	</div>
 
   `,
 })

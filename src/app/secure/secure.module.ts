@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule, AngularFireAuth, AuthProviders } from 'angularfire2';
 import { RouterModule , Routes} from '@angular/router';
 import { SecureComponent } from './secure.component';
@@ -16,6 +17,7 @@ import  {DataTableModule} from "angular2-datatable";
     imports: [
         CommonModule,
         SecureRoutingModule,
+        FormsModule,
         DataTableModule
     ],
     declarations: [
