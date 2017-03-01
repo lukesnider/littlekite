@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule, AngularFireAuth, AuthProviders } from 'angularfire2';
 import { RouterModule , Routes} from '@angular/router';
 import { SecureComponent } from './secure.component';
@@ -9,12 +10,15 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../auth-guard.service';
 import { AuthService } from '../auth.service';
 import { UsersService } from './users-service.service';
+import  {DataTableModule} from "angular2-datatable";
 
 
 @NgModule({
     imports: [
         CommonModule,
-        SecureRoutingModule
+        SecureRoutingModule,
+        FormsModule,
+        DataTableModule
     ],
     declarations: [
         SecureComponent,

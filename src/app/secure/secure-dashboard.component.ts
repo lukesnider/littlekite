@@ -18,18 +18,19 @@ export class SecureDashboardComponent {
   userArray = [];
   constructor(public af: AngularFire,public authService: AuthService, public router: Router) 
   {
-      this.get_user(af);
+      this.get_user();
     
   }
 
 
 
-  get_user(af){
+  get_user(){
     this.af.auth.subscribe(auth => {
-      this.user = af.database.list('/users/-'+auth.uid);
+      this.user = this.af.database.list('/users/-'+auth.uid);
 
       this.user.subscribe(x => {
-        //console.log('Subscriber 1: ', x[0])
+        
+        //console.log('Subscriber 1: ', x)
         x.forEach(element => {
           if(element.$key == 'groups'){
             this.userArray[element.$key] = 'groups';
@@ -38,9 +39,7 @@ export class SecureDashboardComponent {
             this.userArray[element.$key] = element.$value;
           }
         });
-      }
-        
-        );
+      });
     });
   }
 

@@ -4,7 +4,8 @@ import { AngularFireModule, AuthProviders, AuthMethods,AngularFireAuth,FirebaseA
 import { AuthService } from '../auth.service';
 import { Router }      from '@angular/router';
 import { FormsModule }   from '@angular/forms';
-
+import {UsersService} from "./users-service.service";
+declare var $:any;
 
 
 
@@ -14,43 +15,120 @@ import { FormsModule }   from '@angular/forms';
 })
 
 export class SecureComplaintsComponent {
+  complaints: FirebaseListObservable<any[]>;
+  //complaints_by_group = [];
+  //userGroups = [];
   user: FirebaseListObservable<any[]>;
-  userArray = [];
-  constructor(public af: AngularFire,public authService: AuthService, public router: Router) 
+  
+
+  complaintsArray = [];
+  constructor(public af: AngularFire,public router: Router,public userService:UsersService) 
   {
-      //this.get_user(af);
+      this.get_complaints();
     
   }
 
 
 
-  get_user(af){
-    this.af.auth.subscribe(auth => {
-      this.user = af.database.list('/users/-'+auth.uid);
+  get_complaints(){
+    var complaints_by_group = [];
+    var userGroups = this.get_userGroup();
 
-      this.user.subscribe(x => {
-        //console.log('Subscriber 1: ', x[0])
-        x.forEach(element => {
-          if(element.$key == 'groups'){
-            this.userArray[element.$key] = 'groups';
-
-          }else{
-            this.userArray[element.$key] = element.$value;
+    /*userGroups.forEach(function(group){
+      this.af.auth.subscribe(auth => {
+        complaints_by_group[group] = this.af.database.list('/complaints', {
+          query: {
+            orderByChild: "group",
+            equalTo: group
           }
         });
-      }
-        
-        );
+
+      });
     });
+    console.log(complaints_by_group);
+    */
+    /*this.af.auth.subscribe(auth => {
+      this.complaints = this.af.database.list('/complaints', {
+        query: {
+          orderByChild: "group",
+          equalTo: this.get_userGroup()[0]
+        }
+      });
+
+    });*/
+
+    this.af.auth.subscribe(auth => {
+      this.complaints = this.af.database.list('/complaints');
+      console.log(this.complaints);
+      this.user.subscribe(x => {
+        for(var i in x){
+          
+          if(x[i].$key == "groups"){
+            var array = $.map(x[i], function(value, index) {
+                if(value){
+
+                }
+            });
+          }
+        }
+      });
+    });
+
+
+
   }
 
+  add_complaint(form){
+    const itemObservable = this.af.database.object('/test');
+    itemObservable.set({ first_name: form.first_name});
 
+  }
 
 
   logout() {
     this.af.auth.logout();
   }
-}
 
+  get_userGroup(){
+    var groupsArray = [];
+     this.af.auth.subscribe(auth => {
+        this.user = this.af.database.list('/users/-'+auth.uid);
+      
+      this.user.subscribe(x => {
+        groupsArray = [];
+        for(var i in x){
+          
+          if(x[i].$key == "groups"){
+            var array = $.map(x[i], function(value, index) {
+                if(value){
+                  groupsArray.push(index);
+                }
+            });
+            //console.log(groupsArray);
+            //for(var z in x[i]){
+            //  console.log(x[i]);
+              //groupsArray.push(z);
+            //}
+        
+          }
+          //alert(i); // alerts key
+          //alert(foo[i]); //alerts key's value
+        }
+        //console.log('Subscriber 1: ', x)
+        /*x.forEach(function(element){
+          //console.log(element);
+            if(element.$key == "groups"){
+            console.log(element.keys);
+          }
+        });*/
+      });
+    
+  
+    });
+    return groupsArray;
+  }
+
+
+}
 
 
