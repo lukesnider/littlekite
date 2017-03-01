@@ -16,6 +16,8 @@ declare var $:any;
 
 export class SecureComplaintsComponent {
   complaints: FirebaseListObservable<any[]>;
+  //complaints_by_group = [];
+  //userGroups = [];
   user: FirebaseListObservable<any[]>;
   
 
@@ -29,7 +31,23 @@ export class SecureComplaintsComponent {
 
 
   get_complaints(){
-    this.af.auth.subscribe(auth => {
+    var complaints_by_group = [];
+    var userGroups = this.get_userGroup();
+
+    /*userGroups.forEach(function(group){
+      this.af.auth.subscribe(auth => {
+        complaints_by_group[group] = this.af.database.list('/complaints', {
+          query: {
+            orderByChild: "group",
+            equalTo: group
+          }
+        });
+
+      });
+    });
+    console.log(complaints_by_group);
+    */
+    /*this.af.auth.subscribe(auth => {
       this.complaints = this.af.database.list('/complaints', {
         query: {
           orderByChild: "group",
@@ -37,7 +55,27 @@ export class SecureComplaintsComponent {
         }
       });
 
+    });*/
+
+    this.af.auth.subscribe(auth => {
+      this.complaints = this.af.database.list('/complaints');
+      console.log(this.complaints);
+      this.user.subscribe(x => {
+        for(var i in x){
+          
+          if(x[i].$key == "groups"){
+            var array = $.map(x[i], function(value, index) {
+                if(value){
+
+                }
+            });
+          }
+        }
+      });
     });
+
+
+
   }
 
   add_complaint(form){
