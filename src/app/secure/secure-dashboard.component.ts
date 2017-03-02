@@ -4,6 +4,7 @@ import { AngularFireModule, AuthProviders, AuthMethods,AngularFireAuth,FirebaseA
 import { AuthService } from '../auth.service';
 import { Router }      from '@angular/router';
 import { FormsModule }   from '@angular/forms';
+declare var $:any;
 
 
 
@@ -29,7 +30,7 @@ export class SecureDashboardComponent {
       this.user = this.af.database.list('/users/-'+auth.uid);
 
       this.user.subscribe(x => {
-        
+
         //console.log('Subscriber 1: ', x)
         x.forEach(element => {
           if(element.$key == 'groups'){

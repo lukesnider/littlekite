@@ -17,7 +17,7 @@ declare var $:any;
 export class SecureComplaintsComponent {
   complaints: FirebaseListObservable<any[]>;
   //complaints_by_group = [];
-  //userGroups = [];
+  userGroups = [];
   user: FirebaseListObservable<any[]>;
   
 
@@ -25,14 +25,14 @@ export class SecureComplaintsComponent {
   constructor(public af: AngularFire,public router: Router,public userService:UsersService) 
   {
       this.get_complaints();
-    
+      
   }
 
 
 
   get_complaints(){
     var complaints_by_group = [];
-    var userGroups = this.get_userGroup();
+    this.userGroups = this.get_userGroup();
 
     /*userGroups.forEach(function(group){
       this.af.auth.subscribe(auth => {
@@ -59,20 +59,24 @@ export class SecureComplaintsComponent {
 
     this.af.auth.subscribe(auth => {
       this.complaints = this.af.database.list('/complaints');
+
+    });
+    /*this.af.auth.subscribe(auth => {
+      this.complaints = this.af.database.list('/complaints');
       console.log(this.complaints);
       this.user.subscribe(x => {
         for(var i in x){
-          
+          console.log(x[i]);
           if(x[i].$key == "groups"){
             var array = $.map(x[i], function(value, index) {
                 if(value){
-
+                  //console.log()
                 }
             });
           }
         }
       });
-    });
+    });*/
 
 
 
