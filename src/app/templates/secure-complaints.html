@@ -2,17 +2,16 @@
 
 
 <div class="container">
-    <p *myUnless="condition">Show this sentence unless the condition is true.</p>
 
 
-                    <ul class="nav nav-tabs" >
+                    <ul *myTab="true" class="nav nav-tabs" >
                         <li *ngFor="let group of userGroups"><a id="{{group}}" href="">{{group}}</a></li>
                     </ul>
 
 
         
 
-    <div class="row">
+    <div *ngFor="let group of complaints_by_group | async" class="row">
 
         <table class="table table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
             <thead>
@@ -32,11 +31,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let complaint of complaints | async">
-                <td><a href="">{{complaint.number}}</a></td>
-                <td>{{complaint.location}}</td>
-                <td class="text-right">{{complaint.date}}</td>
-                <td>{{complaint.type}}</td>
+            <tr >
+                <td><a href="">{{group | json }}</a></td>
+                <td></td>
+                <td class="text-right"></td>
+                <td></td>
             </tr>
             </tbody>
             <tfoot>

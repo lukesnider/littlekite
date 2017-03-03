@@ -1,20 +1,20 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-/**
- * Add the template content to the DOM unless the condition is true.
- */
-@Directive({ selector: '[myUnless]'})
+
+@Directive({ selector: '[myTab]' })
 export class TabDirective {
-  private hasView = false;
   constructor(
     private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef) { }
-  @Input() set myUnless(condition: boolean) {
-    if (!condition && !this.hasView) {
+    private viewContainer: ViewContainerRef
+    ) { }
+
+  @Input() set myTab(shouldAdd: boolean) {
+    if (shouldAdd) {
+      // If condition is true add template to DOM
       this.viewContainer.createEmbeddedView(this.templateRef);
-      this.hasView = true;
-    } else if (condition && this.hasView) {
+    } else {
+     // Else remove template from DOM
       this.viewContainer.clear();
-      this.hasView = false;
     }
   }
+
 }

@@ -16,11 +16,11 @@ declare var $:any;
 
 export class SecureComplaintsComponent {
   complaints: FirebaseListObservable<any[]>;
-  //complaints_by_group = [];
+  complaints_by_group = [];
   userGroups = [];
   user: FirebaseListObservable<any[]>;
   
-
+ 
   complaintsArray = [];
   constructor(public af: AngularFire,public router: Router,public userService:UsersService) 
   {
@@ -31,22 +31,22 @@ export class SecureComplaintsComponent {
 
 
   get_complaints(){
-    var complaints_by_group = [];
     this.userGroups = this.get_userGroup();
+    //console.log(this.userGroups);
 
-    /*userGroups.forEach(function(group){
-      this.af.auth.subscribe(auth => {
-        complaints_by_group[group] = this.af.database.list('/complaints', {
-          query: {
-            orderByChild: "group",
-            equalTo: group
-          }
-        });
+      for(var group in this.userGroups){
+          this.af.auth.subscribe(auth => {
+            this.complaints_by_group[group] = this.af.database.list('/complaints/'+group);
+          });
+      };
 
-      });
-    });
-    console.log(complaints_by_group);
-    */
+      for(var i of this.complaints_by_group){
+        console.log(i);
+      };
+
+
+    //});
+    //console.log(this.complaints_by_group);
     /*this.af.auth.subscribe(auth => {
       this.complaints = this.af.database.list('/complaints', {
         query: {
@@ -57,10 +57,10 @@ export class SecureComplaintsComponent {
 
     });*/
 
-    this.af.auth.subscribe(auth => {
-      this.complaints = this.af.database.list('/complaints');
+    //this.af.auth.subscribe(auth => {
+     // this.complaints = this.af.database.list('/complaints/Complaint Manager');
 
-    });
+    //});
     /*this.af.auth.subscribe(auth => {
       this.complaints = this.af.database.list('/complaints');
       console.log(this.complaints);
