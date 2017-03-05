@@ -5,6 +5,8 @@ import { AuthService } from '../auth.service';
 import { Router }      from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import {UsersService} from "./users-service.service";
+import * as firebase from "firebase";
+
 declare var $:any;
 
 
@@ -19,17 +21,73 @@ export class SecureComplaintsComponent {
   complaints_by_group = [];
   userGroups = [];
   user: FirebaseListObservable<any[]>;
-  
+  database = firebase.database();
+
  
   complaintsArray = [];
   constructor(public af: AngularFire,public router: Router,public userService:UsersService) 
   {
-      this.get_complaints();
+
+      //this.get_complaints();
+      this.getComplaintData();
       
   }
 
+  getComplaintData(){
+     this.userGroups = this.get_userGroup();
 
+     this.userGroups.forEach(function(group){
+       var thisGroup = firebase.database().ref('complaints/' + group);
+       thisGroup.once('value', function(snapshot){
+          var data = snapshot.val();
+          this.addTableByGroup(group,data);
+          //for(let d in data){
+          //  $('.container').append("<li>"+data[d].number+"</li>");
+          //}
+       });
+     });
+  }
 
+  addTableByGroup(group,complaints){
+    var html =
+    "<div  class='row'> "+
+
+        "<table class='table table-hover' [mfData]='data' #mf='mfDataTable' [mfRowsOnPage]='5'>"+
+            "<thead>"+
+           " <tr>"+
+               " <th style='width: 20%'>"+
+                    "<mfDefaultSorter  by='name'>Number</mfDefaultSorter>"+
+               " </th>"+
+                "<th style='width: 20%'>"+
+                    "<mfDefaultSorter by='email'>Locations</mfDefaultSorter>"+
+                "</th>"+
+                "<th style='width: 20%'>"+
+                    "<mfDefaultSorter by='age'>Date</mfDefaultSorter>"+
+                "</th>"+
+                "<th style='width: 40%'>"+
+                    "<mfDefaultSorter by='city'>Type</mfDefaultSorter>"+
+                "</th>"+
+            "</tr>"+
+            "</thead>"+
+            "<tbody>"+
+            "<tr >"+
+                "<td><a href=''></a></td>"+
+                "<td></td>"+
+                "<td class='text-right'></td>"+
+                "<td></td>"+
+            "</tr>"+
+            "</tbody>"+
+            "<tfoot>"+
+            "<tr>"+
+                "<td colspan='4'>"+
+                    "<mfBootstrapPaginator [rowsOnPageSet]='[5,10,25]'></mfBootstrapPaginator>"+
+                "</td>"+
+            "</tr>"+
+            "</tfoot>"+
+        "</table>"+
+
+    "</div>";
+  }
   get_complaints(){
     this.userGroups = this.get_userGroup();
     //console.log(this.userGroups);

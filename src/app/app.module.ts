@@ -11,6 +11,7 @@ import { LoginComponent } from './login.component';
 import { SecureModule } from './secure/secure.module';
 //import { AuthGuard } from './auth-guard.service';
 //import { AuthService } from './auth.service';
+import * as firebase from "firebase";
 
 
 
@@ -21,6 +22,7 @@ export const firebaseConfig = {
     storageBucket: "littlekite-3c47e.appspot.com",
     messagingSenderId: "754158819632"
 };
+firebase.initializeApp(firebaseConfig);
 
 export const FirebaseAuthConfig = {
   provider: AuthProviders.Password
