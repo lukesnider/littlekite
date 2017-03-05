@@ -35,20 +35,70 @@ export class SecureComplaintsComponent {
 
   getComplaintData(){
      this.userGroups = this.get_userGroup();
-
+     //console.log(this.userGroups);
      this.userGroups.forEach(function(group){
+        var html =
+            "<div  id='"+group.replace(' ', '')+"tab' class='row tab-content tab-pane' role='tabpanel' > "+
+              "<h4>"+group+"</h4>"+
+                "<table class='table table-hover' [mfData]='data' #mf='mfDataTable' [mfRowsOnPage]='5'>"+
+                    "<thead>"+
+                  " <tr>"+
+                      " <th style='width: 20%'>"+
+                            "<mfDefaultSorter  by='name'>Number</mfDefaultSorter>"+
+                      " </th>"+
+                        "<th style='width: 20%'>"+
+                            "<mfDefaultSorter by='email'>Locations</mfDefaultSorter>"+
+                        "</th>"+
+                        "<th style='width: 20%'>"+
+                            "<mfDefaultSorter by='age'>Date</mfDefaultSorter>"+
+                        "</th>"+
+                        "<th style='width: 40%'>"+
+                            "<mfDefaultSorter by='city'>Type</mfDefaultSorter>"+
+                        "</th>"+
+                    "</tr>"+
+                    "</thead>"+
+                    "<tbody id='"+group.replace(' ', '')+"'>"+
+                    
+
+                    
+                    "</tbody>"+
+                    "<tfoot>"+
+                    "<tr>"+
+                        "<td colspan='4'>"+
+                            "<mfBootstrapPaginator [rowsOnPageSet]='[5,10,25]'></mfBootstrapPaginator>"+
+                        "</td>"+
+                    "</tr>"+
+                    "</tfoot>"+
+                "</table>"+
+
+            "</div>";
+            
+     
+
        var thisGroup = firebase.database().ref('complaints/' + group);
+       
        thisGroup.once('value', function(snapshot){
           var data = snapshot.val();
-          this.addTableByGroup(group,data);
-          //for(let d in data){
-          //  $('.container').append("<li>"+data[d].number+"</li>");
-          //}
+          //var test = this.addTableByGroup();
+           $('.container').append(html);
+          for(let d in data){
+           var complainthtml = 
+                      "<tr >"+
+                        "<td><a href=''>"+data[d].number+"</a></td>"+
+                        "<td></td>"+
+                        "<td class='text-right'></td>"+
+                        "<td></td>"+
+                      "</tr>";
+            $('#'+group.replace(' ', '')+'').append(complainthtml);
+
+          }
        });
      });
   }
 
-  addTableByGroup(group,complaints){
+  addTableByGroup(){
+
+    //console.log(complaints);
     var html =
     "<div  class='row'> "+
 
@@ -87,7 +137,13 @@ export class SecureComplaintsComponent {
         "</table>"+
 
     "</div>";
+
+    //$('.container').append("<li>"+data[d].number+"</li>");
+    return html;
   }
+
+
+
   get_complaints(){
     this.userGroups = this.get_userGroup();
     //console.log(this.userGroups);
