@@ -11,7 +11,7 @@ import { AuthGuard } from '../auth-guard.service';
 import { AuthService } from '../auth.service';
 import { UsersService } from './users-service.service';
 import  {DataTableModule} from "angular2-datatable";
-
+import { TabDirective } from '../directives/tab.directive';
 
 @NgModule({
     imports: [
@@ -20,10 +20,14 @@ import  {DataTableModule} from "angular2-datatable";
         FormsModule,
         DataTableModule
     ],
+    exports: [
+        TabDirective
+    ],
     declarations: [
         SecureComponent,
         SecureDashboardComponent,
-        SecureComplaintsComponent
+        SecureComplaintsComponent,
+        TabDirective
     ],
   providers: [AuthGuard,AuthService,UsersService]
 
