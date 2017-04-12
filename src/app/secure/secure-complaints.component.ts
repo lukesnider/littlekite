@@ -30,15 +30,16 @@ export class SecureComplaintsComponent {
 
       //this.get_complaints();
       this.getComplaintData();
-      
+
   }
 
   getComplaintData(){
      this.userGroups = this.get_userGroup();
      //console.log(this.userGroups);
      this.userGroups.forEach(function(group){
+       
         var html =
-            "<div  id='"+group.replace(' ', '')+"tab' class='row tab-content tab-pane' role='tabpanel' > "+
+            "<div  id='"+group.replace(/[' ]/g, '')+"tab' class='row tab-content tab-pane' role='tabpanel' > "+
               "<h4>"+group+"</h4>"+
                 "<table class='table table-hover' [mfData]='data' #mf='mfDataTable' [mfRowsOnPage]='5'>"+
                     "<thead>"+
@@ -57,7 +58,7 @@ export class SecureComplaintsComponent {
                         "</th>"+
                     "</tr>"+
                     "</thead>"+
-                    "<tbody id='"+group.replace(' ', '')+"'>"+
+                    "<tbody id='"+group.replace(/[' ]/g, '')+"'>"+
                     
 
                     
@@ -89,7 +90,7 @@ export class SecureComplaintsComponent {
                         "<td class='text-right'></td>"+
                         "<td></td>"+
                       "</tr>";
-            $('#'+group.replace(' ', '')+'').append(complainthtml);
+            $('#'+group.replace(/[' ]/g, '')+'').append(complainthtml);
 
           }
        });

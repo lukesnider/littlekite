@@ -1,16 +1,17 @@
 
-
+<script>
+    console.log(userGroups);
+</script>
 
 <div class="container">
 
-
-                    <ul *myTab="true" class="nav nav-tabs" >
-                        <li id="{{group.replace(' ', '')+'li'}}" *ngFor="let group of userGroups">
-                            <a id="{{group.replace(' ', '')+'tab'}}" href="#{{group.replace(' ', '')+'tab'}}" data-toggle="tab">
-                                {{group}}
-                                </a>
-                            </li>
-                    </ul>
+    <ul *myTab="true" class="nav nav-tabs" >
+        <li id="{{group.replace(' ', '')+'li'}}" *ngFor="let group of userGroups">
+            <a id="{{group.replace(' ', '')+'tab'}}" href="#{{group.replace(' ', '')+'tab'}}" data-toggle="tab">
+                {{group}}
+            </a>
+        </li>
+    </ul>
 
 
         
