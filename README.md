@@ -1,5 +1,5 @@
 # Littlekite
-Complaint manager application redesigned using bootstrap and angular 2 framework with google firebase database/hosting/authentication
+Complaint manager application redesigned using angular with Google Firebase database/hosting/authentication
 
 <p>This site can be viewed <a href="http://littlekite.lukecsnider.com">here</a>.</p>
 
